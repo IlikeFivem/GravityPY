@@ -1,6 +1,6 @@
 import discord
 from discord.ext import commands
-from discord.ext.commands.core import is_owner
+from discord.ext.commands.core import has_permissions, is_owner
 import os
 import config
 
@@ -13,19 +13,19 @@ async def on_ready():
 
 
 @bot.command()
-@is_owner(866285734808780812)
+@has_permissions(administrator=True)
 async def load(ctx, extension):
     bot.load_extension(f'cogs.{extension}')
     await ctx.send(f'Cog {extension} has been loaded!')
 
 @bot.command()
-@is_owner(866285734808780812)
+@has_permissions(administrator=True)
 async def unload(ctx, extension):
     bot.unload_extension(f'cogs.{extension}')
     await ctx.send(f'Cog {extension} has been unloaded!')
 
 @bot.command()
-@is_owner(866285734808780812)
+@has_permissions(administrator=True)
 async def reload(ctx, extension):
     bot.unload_extension(f'cogs.{extension}')
     bot.load_extension(f'cogs.{extension}')
